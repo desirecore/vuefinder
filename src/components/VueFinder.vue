@@ -3,7 +3,7 @@
     <div :class="app.theme.actualValue === 'dark' ? 'dark': ''">
       <div
           :class="app.fullscreen ? 'fixed w-screen inset-0 z-20' : 'relative rounded-md'"
-          :style="!app.fullscreen ? 'max-height: ' + maxHeight : ''"
+          :style="!app.fullscreen ? 'height: 100%; width: 100%;' : ''"
           class="border flex flex-col bg-white dark:bg-gray-800 text-gray-700 dark:text-neutral-400 border-neutral-300 dark:border-gray-900 min-w-min select-none"
           @mousedown="app.emitter.emit('vf-contextmenu-hide')"
           @touchstart="app.emitter.emit('vf-contextmenu-hide')">
