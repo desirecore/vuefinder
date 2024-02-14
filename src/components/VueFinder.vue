@@ -29,7 +29,7 @@ export default {
 </script>
 
 <script setup>
-import {inject, onMounted, provide, ref} from 'vue';
+import {inject, onMounted, provide, ref, defineExpose} from 'vue';
 import ServiceContainer from "../ServiceContainer.js";
 
 import VFToolbar from '../components/Toolbar.vue';
@@ -213,7 +213,7 @@ onMounted(() => {
   app.emitter.emit('vf-fetch', {params: {q: 'index', adapter: app.adapter, ...pathExists}});
 });
 
-expose({
+defineExpose({
   app
 });
 </script>
