@@ -164,10 +164,11 @@ export class Requester {
         if (node.url != null) {
             return node.url
         }
+        const sessionKey = window.vueFinderSessionKey
         const transform = this.transformRequestParams({
             url: '',
             method: 'get',
-            params: { q: 'preview', adapter, path: node.path }
+            params: { q: 'preview', adapter, path: node.path, sessionKey }
         });
         return transform.url + '?' + new URLSearchParams(transform.params).toString()
     }

@@ -171,6 +171,11 @@ app.emitter.on('vf-fetch', ({params, body = null, onSuccess = null, onError = nu
     if (!noCloseModal) {
       app.emitter.emit('vf-modal-close');
     }
+    if (params.q === 'index') {
+      if (data.sessionKey) {
+        window.vueFinderSessionKey = data.sessionKey;
+      }
+    }
     updateItems(data);
     if (onSuccess) {
       onSuccess(data);
