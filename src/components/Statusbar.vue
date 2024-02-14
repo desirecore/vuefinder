@@ -19,6 +19,11 @@
     </div>
     <div class="flex leading-5 items-center justify-end">
 
+      <button class="vf-btn py-0 vf-btn-primary"
+              :class="{disabled: !isSelectButtonActive}"
+              :disabled="!isSelectButtonActive"
+              v-if="app.selectButton.active" @click="app.selectButton.click(app.selectedItems, $event)">{{ t("Select") }}</button>
+
       <span class="mr-1" :aria-label="t('Settings')" data-microtip-position="top-left" role="tooltip" @click="app.emitter.emit('vf-modal-show', {type:'about'})">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-slate-500 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -37,7 +42,7 @@ export default {
 </script>
 
 <script setup>
-import {inject, ref} from 'vue';
+import {computed, inject, ref} from 'vue';
 
 const app = inject('ServiceContainer');
 const {t} = app.i18n;
@@ -53,12 +58,18 @@ const handleStorageSelect = () => {
 
 app.emitter.on('vf-nodes-selected', (items) => {
   selectedItemCount.value = items.length;
+
 })
 
 const searchQuery = ref('');
 
 app.emitter.on('vf-search-query', ({newQuery}) => {
   searchQuery.value = newQuery;
+});
+
+const isSelectButtonActive = computed(() => {
+  const selectionAllowed = app.selectButton.multiple ? app.selectedItems.length > 0 : app.selectedItems.length === 1;
+  return app.selectButton.active && selectionAllowed;
 });
 
 </script>
