@@ -11,13 +11,9 @@
         </svg>
       </div>
       <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-        <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-400" id="modal-title">
-          {{ t('About %s', 'Vuefinder ' + app.version ) }}</h3>
         <div class="mt-2">
-
-          <p class="text-sm text-gray-500">{{ t('Vuefinder is a file manager component for vue 3.') }}</p>
           <div>
-            <h3 class="text-sm font-semibold mt-5 text-gray-900 dark:text-gray-400 tracking-wider">{{ t('Settings') }}</h3>
+            <h3 class="text-lg font-semibold mt-5 text-gray-900 dark:text-gray-400 tracking-wider">{{ t('Settings') }}</h3>
           </div>
           <div class="mt-3 text-left">
             <fieldset>

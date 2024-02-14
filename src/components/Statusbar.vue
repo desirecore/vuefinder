@@ -19,9 +19,12 @@
     </div>
     <div class="flex leading-5 items-center justify-end">
 
-      <span class="mr-1" :aria-label="t('About')" data-microtip-position="top-left" role="tooltip" @click="app.emitter.emit('vf-modal-show', {type:'about'})">
+      <span class="mr-1" :aria-label="t('Settings')" data-microtip-position="top-left" role="tooltip" @click="app.emitter.emit('vf-modal-show', {type:'about'})">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-slate-500 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <g fill-rule="evenodd" clip-rule="evenodd">
+            <path d="M6.848 1.254a2.344 2.344 0 0 1 2.304 0l5.079 2.867a2.344 2.344 0 0 1 1.19 2.041v5.676c0 .845-.454 1.625-1.19 2.04l-5.079 2.868a2.344 2.344 0 0 1-2.304 0L1.769 13.88a2.344 2.344 0 0 1-1.19-2.041V6.162c0-.845.454-1.625 1.19-2.04l5.079-2.868Z"/>
+            <path d="M8 7.125a1.875 1.875 0 1 0 0 3.75 1.875 1.875 0 0 0 0-3.75ZM4.562 9a3.437 3.437 0 1 1 6.875 0 3.437 3.437 0 0 1-6.874 0Z"/>
+          </g>
         </svg>
       </span>
     </div>
