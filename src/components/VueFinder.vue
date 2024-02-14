@@ -213,4 +213,7 @@ onMounted(() => {
   app.emitter.emit('vf-fetch', {params: {q: 'index', adapter: app.adapter, ...pathExists}});
 });
 
+expose({
+  app
+});
 </script>
