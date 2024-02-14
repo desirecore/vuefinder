@@ -186,7 +186,7 @@ const B = {
   FULL_SCREEN: "fullscreen",
   DOWNLOAD: "download",
   LANGUAGE: "language"
-}, We = Object.values(B), Ge = "2.2.2";
+}, We = Object.values(B), Ge = "2.2.3";
 function ye(p, e, s, r, a) {
   return (e = Math, s = e.log, r = 1024, a = s(p) / s(r) | 0, p / e.pow(r, a)).toFixed(0) + " " + (a ? "KMGTPEZY"[--a] + "iB" : "B");
 }
@@ -1498,6 +1498,8 @@ const gs = { class: "relative flex-auto flex flex-col overflow-hidden" }, _s = {
         adapter: a.path.split("://")[0],
         path: a.path
       }), a.emitter.emit("vf-fetch", { params: { q: "index", adapter: a.adapter, ...v } });
+    }), expose({
+      app: a
     }), (v, b) => (n(), m("div", {
       class: "vuefinder",
       ref_key: "root",
