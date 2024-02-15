@@ -186,7 +186,7 @@ const B = {
   FULL_SCREEN: "fullscreen",
   DOWNLOAD: "download",
   LANGUAGE: "language"
-}, We = Object.values(B), Ge = "2.2.7";
+}, We = Object.values(B), Ge = "2.2.8";
 function ye(p, e, s, n, o) {
   return (e = Math, s = e.log, n = 1024, o = s(p) / s(n) | 0, p / e.pow(n, o)).toFixed(0) + " " + (o ? "KMGTPEZY"[--o] + "iB" : "B");
 }
@@ -1489,6 +1489,8 @@ const gs = { class: "relative flex-auto flex flex-col overflow-hidden" }, _s = {
       }).catch((h) => {
         console.error(h), y && y(h);
       });
+    }), r.emitter.on("vf-download", (k) => {
+      console.log("download");
     }), P(() => {
       let k = {};
       r.path.includes("://") && (k = {
