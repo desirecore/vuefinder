@@ -68,6 +68,7 @@ const loadPreview = (type) => (app.modal.data.item.mime_type ?? '').startsWith(t
 const download = () => {
   const url = app.requester.getDownloadUrl(app.modal.data.adapter, app.modal.data.item);
   app.emitter.emit('vf-download', url);
+  app.emitter.emit('vf-modal-close');
 }
 
 const enabledPreview = app.features.includes(FEATURES.PREVIEW)
