@@ -29,17 +29,15 @@
       <div><span class="font-bold pl-2">{{ t('Last Modified') }}: </span> {{ datetimestring(app.modal.data.item.last_modified) }}</div>
     </div>
     <div class="text-xs text-gray-600 dark:text-gray-400" v-if="app.features.includes(FEATURES.DOWNLOAD)">
-      <span>{{ t('Download doesn\'t work? You can try right-click "Download" button, select "Save link as...".') }}</span>
+      <!-- <span>{{ t('Download doesn\'t work? You can try right-click "Download" button, select "Save link as...".') }}</span> -->
     </div>
 
     <template v-slot:buttons>
       <button type="button" @click="app.emitter.emit('vf-modal-close')" class="vf-btn vf-btn-secondary">{{ t('Close') }}</button>
-      <a
-        target="_blank"
+      <div
         class="vf-btn vf-btn-primary"
-        :download="app.requester.getDownloadUrl(app.modal.data.adapter, app.modal.data.item)"
-        :href="app.requester.getDownloadUrl(app.modal.data.adapter, app.modal.data.item)"
-        v-if="app.features.includes(FEATURES.DOWNLOAD)">{{ t('Download') }}</a>
+        @click="download"
+        v-if="app.features.includes(FEATURES.DOWNLOAD)">{{ t('Download') }}</div>
     </template>
   </v-f-modal-layout>
 </template>

@@ -3,10 +3,10 @@
     <li class="px-2 py-1.5 cursor-pointer hover:bg-neutral-200 dark:hover:bg-gray-700"
         v-for="(item) in filteredItems" :key="item.title" @click="run(item)">
       <template v-if="item.link">
-        <a target="_blank" :href="item.link" :download="item.link">
+        <div @click="download(item.link)">
           <span class="px-1"></span>
           <span>{{ item.title() }}</span>
-        </a>
+        </div>
       </template>
       <template v-else>
         <span class="px-1"></span>
@@ -203,4 +203,7 @@ const showContextMenu = (event, area) => {
   });
 };
 
+const download = (url) => {
+  app.emitter.emit('vf-download', url);
+}
 </script>
