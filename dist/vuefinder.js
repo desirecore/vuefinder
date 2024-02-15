@@ -186,7 +186,7 @@ const B = {
   FULL_SCREEN: "fullscreen",
   DOWNLOAD: "download",
   LANGUAGE: "language"
-}, We = Object.values(B), Ge = "2.2.6";
+}, We = Object.values(B), Ge = "2.2.7";
 function ye(p, e, s, n, o) {
   return (e = Math, s = e.log, n = 1024, o = s(p) / s(n) | 0, p / e.pow(n, o)).toFixed(0) + " " + (o ? "KMGTPEZY"[--o] + "iB" : "B");
 }
