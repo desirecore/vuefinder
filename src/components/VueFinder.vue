@@ -174,6 +174,7 @@ app.emitter.on('vf-fetch', ({params, body = null, onSuccess = null, onError = nu
     if (params.q === 'index') {
       if (data.sessionKey) {
         window.vueFinderSessionKey = data.sessionKey;
+        window.vueFinderSessionKeyDate = new Date();
       }
     }
     updateItems(data);

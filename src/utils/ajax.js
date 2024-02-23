@@ -165,6 +165,26 @@ export class Requester {
             return node.url
         }
         const sessionKey = window.vueFinderSessionKey
+        const sessionKeyDate = window.vueFinderSessionKeyDate // window.vueFinderSessionKeyDate = new Date();
+        // 如果sessionKey为空或者sessionKeyDate为空或者sessionKeyDate超过当前时间540s，重新获取sessionKey
+        if (!sessionKey || !sessionKeyDate || (new Date() - sessionKeyDate) > 540000) {
+            try {
+              // 阻塞进程，同步请求refreshSession.php，带上headers
+              const url = config.baseUrl + 'refreshSession.php';
+              const xhr = new XMLHttpRequest();
+              xhr.open('GET', url, false);
+              xhr.setRequestHeader('Authorization', config.headers[Authorization]);
+              xhr.send();
+              if (xhr.status === 200) {
+                // 获取json
+                const jsonData = JSON.parse(xhr.responseText);
+                window.vueFinderSessionKey = jsonData.sessionKey;
+                window.vueFinderSessionKeyDate = new Date();
+              }
+            } catch (err) {
+              console.error(err);
+            }
+        }
         const transform = this.transformRequestParams({
             url: '',
             method: 'get',
