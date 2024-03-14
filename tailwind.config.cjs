@@ -21,8 +21,12 @@ module.exports = {
       )
 
       // Scope the selectors to specific components
+      // preflightStyles.walkRules((rule) => {
+      //   rule.selector = ".vuefinder " + rule.selector;
+      // });
+      // Scope the selectors to specific components
       preflightStyles.walkRules((rule) => {
-        rule.selector = ".vuefinder " + rule.selector;
+        rule.selector = rule.selector.replace(/(\*|[#.][_a-zA-Z]+[_a-zA-Z0-9-]*|\b[a-z]+\b|\[[^\]]+\]|::?[a-z-]+)/g, ".vuefinder $1");
       });
 
       addBase(preflightStyles.nodes)
