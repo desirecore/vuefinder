@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex-auto flex flex-col overflow-hidden">
+  <div ref="dropArea" class="relative flex-auto flex flex-col overflow-hidden">
     <div v-if="app.view === 'list' || searchQuery.length" class="grid grid-cols-12 px-1 bg-neutral-50 dark:bg-gray-800 border-b border-neutral-300 dark:border-gray-700 text-xs select-none divide-x">
       <div @click="sortBy('basename')" class="col-span-7 vf-sort-button">
         {{ t('Name') }} <SortIcon :direction="sort.order" v-show="sort.active && sort.column === 'basename'"/>
@@ -74,6 +74,9 @@
     </div>
 
     <Toast/>
+    <div class="pointer-events-none select-none cursor-pointer w-full h-full bg-slate-100 text-slate-500 absolute flex items-center justify-center" v-if="hasFilesInDropArea">
+      {{ t('Release to drop these files.') }}
+    </div>
   </div>
 </template>
 
@@ -87,6 +90,7 @@ import SortIcon from "./SortIcon.vue";
 import ItemIcon from "./ItemIcon.vue";
 import DragItem from "./DragItem.vue";
 import Item from "./Item.vue";
+import ModalUpload from "./modals/ModalUpload.vue";
 
 
 const app = inject('ServiceContainer');
@@ -97,6 +101,11 @@ const dragImage = ref(null);
 
 const searchQuery = ref('');
 const ds = app.dragSelect;
+const uploading = ref(false);
+const hasFilesInDropArea = ref(false);
+
+/** @type {import('vue').Ref<HTMLDivElement>} */
+const dropArea = ref(null);
 
 /** @type {import('vanilla-lazyload').ILazyLoadInstance} */
 let vfLazyLoad
@@ -169,6 +178,78 @@ const sortBy = (column) => {
 
 onMounted(() => {
   vfLazyLoad = new LazyLoad(ds.area.value);
+
+  dropArea.value.addEventListener('dragover', ev => {
+    ev.preventDefault();
+    hasFilesInDropArea.value = true;
+  });
+  dropArea.value.addEventListener('dragleave', ev => {
+    ev.preventDefault();
+    hasFilesInDropArea.value = false;
+  });
+  /**
+   * @callback ResultCallback
+   * @param {FileSystemEntry|FileSystemDirectoryEntry|FileSystemFileEntry} fileSystemEntry
+   * @param {File} file
+   */
+
+  /**
+   * Iterate through all dirs & files, will invoke resultCallback multiple times when read file
+   * @param {ResultCallback} resultCallback
+   * @param {FileSystemEntry|FileSystemDirectoryEntry|FileSystemFileEntry} item
+   * @returns {Promise<void>}
+   */
+  function scanFiles(resultCallback, item) {
+    if (item.isFile) {
+      return new Promise((resolve, reject) => {
+        item.file(file => {
+          resultCallback(item, file);
+          resolve();
+        }, reject);
+      });
+    }
+
+    if (item.isDirectory) {
+      return new Promise((resolve, reject) => {
+        const reader = item.createReader();
+        reader.readEntries(async entries => {
+          try {
+            for (const entry of entries) {
+              await scanFiles(resultCallback, entry);
+            }
+            resolve();
+          } catch (error) {
+            reject(error);
+          }
+        }, reject);
+      });
+    }
+
+    return Promise.resolve();
+  }
+
+  dropArea.value.addEventListener('drop', async ev => {
+    ev.preventDefault();
+    hasFilesInDropArea.value = false;
+    const trimFileName = /^[/\\](.+)/;
+    const fileList = [];
+    
+    const promises = [...ev.dataTransfer.items].map(async item => {
+      if (item.kind === "file") {
+        await scanFiles((entry, file) => {
+          const matched = trimFileName.exec(entry.fullPath);
+          fileList.push({file, path: matched[1]});
+        }, item.webkitGetAsEntry());
+      }
+    });
+
+    // 等待所有的异步操作完成
+    await Promise.all(promises);
+
+    // 将文件列表暂存到全局变量中，以便在弹窗中使用
+    window.tmpFileList = fileList;
+    app.modal.open(ModalUpload, {items: ds.getSelected()});
+  });
 });
 
 onUpdated(() => {

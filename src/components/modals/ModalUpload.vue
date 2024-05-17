@@ -470,6 +470,15 @@ onMounted(async () => {
   };
   internalFileInput.value.addEventListener('change', onFileInputChange);
   internalFolderInput.value.addEventListener('change', onFileInputChange);
+  console.log('初始化')
+  // 如果传递了文件列表，我们将在这里添加它们
+  if (window.tmpFileList) {
+    console.log(window.tmpFileList)
+    window.tmpFileList.forEach(({ file, path }) => {
+      addFile(file, path);
+    });
+    window.tmpFileList = null;
+  }
 });
 
 onBeforeUnmount(() => {
