@@ -62,8 +62,6 @@ export default {
   "Are you sure you want to move these files?" : "آیا برای انتقال فایل ها مطمئن هستید ؟",
   "File Size": "سایز فایل",
   "Last Modified": "آخرین ویرایش",
-  "Drag&Drop: on": "Drag&Drop: روشن",
-  "Drag&Drop: off": "Drag&Drop: خاموش",
   "Select Folders": "Select Folders",
   "Clear all": "پاک کردن همه",
   "Clear only successful": "پاک کردن فقط موفق",
@@ -85,5 +83,10 @@ export default {
   "Light": "روشن",
   "System": "سیستم",
   "Target Directory" : "پوشه مقصد",
+  "Select": "انتخاب",
+  "Compact list view": "نمایش لیست کوچک",
+  "Show thumbnails": "نمایش تصاویر کوچک",
+  "Persist path on reload": "مسیر را در هنگام بارگذاری مجدد ذخیره کن",
+  "Compact list view": "نمایش لیست کوچک",
   "uppy": uppyLocaleFa
 }

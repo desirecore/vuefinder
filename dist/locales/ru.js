@@ -62,8 +62,6 @@ export default {
   "Are you sure you want to move these files?": "Вы уверены, что хотите переместить эти файлы?",
   "File Size": "Размер файла",
   "Last Modified": "Последнее изменение",
-  "Drag&Drop: on": "Drag&Drop: on",
-  "Drag&Drop: off": "Drag&Drop: off",
   "Select Folders": "Выбрать папки",
   "Clear all": "Очистить все",
   "Clear only successful": "Очистить только успешные",
@@ -85,5 +83,10 @@ export default {
   "Light": "Светлый",
   "System": "Система",
   "Target Directory" : "Целевая директория",
+  "Select": "Выбрать",
+  "Compact list view": "Компактный вид списка",
+  "Show thumbnails": "Показать миниатюры",
+  "Persist path on reload": "Сохранить путь при перезагрузке",
+  "Compact list view": "Компактный вид списка",
   "uppy": uppyLocaleRu
 }

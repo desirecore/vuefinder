@@ -63,8 +63,6 @@ export default {
   "Are you sure you want to move these files?" : "Êtes-vous sûr de vouloir déplacer ces fichiers?",
   "File Size": "Taille du fichier",
   "Last Modified": "Dernière modification",
-  "Drag&Drop: on": "Drag&Drop: on",
-  "Drag&Drop: off": "Drag&Drop: off",
   "Select Folders": "Sélectionner des dossiers",
   "Clear all": "Tout effacer",
   "Clear only successful": "Effacer uniquement les réussites",
@@ -86,5 +84,10 @@ export default {
   "Light": "Clair",
   "System": "Système",
   "Target Directory" : "Répertoire cible",
+  "Select": "Sélectionner",
+  "Compact list view": "Vue en liste compacte",
+  "Show thumbnails": "Afficher les miniatures",
+  "Persist path on reload": "Conserver le chemin lors du rechargement",
+  "Compact list view": "Vue en liste compacte",
   "uppy": uppyLocaleFr
 }

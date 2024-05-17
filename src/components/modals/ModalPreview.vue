@@ -1,5 +1,5 @@
 <template>
-  <v-f-modal-layout>
+  <ModalLayout>
     <div class="sm:flex sm:items-start">
       <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
         <div v-if="enabledPreview">
@@ -33,24 +33,19 @@
     </div>
 
     <template v-slot:buttons>
-      <button type="button" @click="app.emitter.emit('vf-modal-close')" class="vf-btn vf-btn-secondary">{{ t('Close') }}</button>
+      <!-- <button type="button" @click="app.emitter.emit('vf-modal-close')" class="vf-btn vf-btn-secondary">{{ t('Close') }}</button> -->
+      <button type="button" @click="app.modal.close()" class="vf-btn vf-btn-secondary">{{ t('Close') }}</button>
       <div
         class="vf-btn vf-btn-primary"
-        @click="download"
+        @click="download()"
         v-if="app.features.includes(FEATURES.DOWNLOAD)">{{ t('Download') }}</div>
     </template>
-  </v-f-modal-layout>
+  </ModalLayout>
 </template>
-
-<script>
-export default {
-  name: 'VFModalPreview'
-};
-</script>
 
 <script setup>
 import {inject, ref} from 'vue';
-import VFModalLayout from './ModalLayout.vue';
+import ModalLayout from './ModalLayout.vue';
 import Text from '../previews/Text.vue';
 import Image from '../previews/Image.vue';
 import Default from '../previews/Default.vue';
